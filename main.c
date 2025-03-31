@@ -27,7 +27,7 @@ int main(void)
     scanf("%d",&password);
     fflush(stdin);
     if(password==2025){
-        printf("歡迎！\n");
+        printf("歡迎！！\n");
         printf("按ENTER鍵繼續...\n");
         getchar();
         system("clear");
