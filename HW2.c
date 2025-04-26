@@ -69,8 +69,9 @@ int main(void)
                     printf("\n");
                 }
                 clear_screen();
+                continue;//回到主選單
             }
-            continue;//回到主選單
+            
         }
     }
    
@@ -84,6 +85,5 @@ void clear_screen(void){
 void clear_buffer(void){
     int c;
     while((c=getchar())!='\n' && c!=EOF);//清除緩衝區
-        
 }
 
