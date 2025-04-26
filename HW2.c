@@ -72,8 +72,8 @@ int main(void)
                 continue;//回到主選單
             }
             else if(ch1=='b' || ch1=='B'){  //使用者輸入b或B
+                clear_screen();
                 while(1){
-                    clear_screen();
                     printf("輸入一個1~9的正整數：");
                     scanf("%d",&num);
                     
