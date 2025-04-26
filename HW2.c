@@ -93,6 +93,28 @@ int main(void)
                 clear_screen();
                 continue;//回到主選單
             }
+            else if(ch1=='c' || ch1=='C'){  //使用者輸入c或C
+                clear_screen();
+                while(1){
+                    printf("請問是要重新輸入？(y/n)");
+                    scanf("%c",&ch3);
+                    clear_buffer();
+                    if(ch3!='y' && ch3!='Y' && ch3!='n' && ch3!='Y'){
+                        printf("error\n");
+                        continue;//輸入字元只能是y或Ｙ或n或N
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(ch3=='y' || ch3=='Y'){  //使用者輸入y或Y
+                    clear_screen();
+                    continue;//回到主選單
+                }
+                if(ch3=='n' || ch3=='N'){  //使用者輸入n或N
+                    return 0;//結束程式
+                }
+            }
         }
     }
    
