@@ -56,7 +56,7 @@ int main(void)
                         break;
                     }
                     else{
-                        printf("error\n");
+                        printf("錯誤：只能在a~n中間\n");
                     }
                 }
                 for(l=ch2;l>='a';l--){  //印出直角三角形
@@ -78,7 +78,7 @@ int main(void)
                     scanf("%d",&num);
                     clear_buffer();
                     if(num<1 || num>9){  //輸入正整數只能在1~9之間
-                        printf("error\n");
+                        printf("錯誤：只能是1~9的正整數\n");
                     }
                     else{
                         break;
@@ -100,7 +100,7 @@ int main(void)
                     scanf("%c",&ch3);
                     clear_buffer();
                     if(ch3!='y' && ch3!='Y' && ch3!='n' && ch3!='Y'){
-                        printf("error\n");
+                        printf("錯誤：只能是n或N或y或Y\n");
                         continue;//輸入字元只能是y或Ｙ或n或N
                     }
                     else{
@@ -121,7 +121,6 @@ int main(void)
     return 0;
 }
 void clear_screen(void){
-    clear_buffer();//清除緩衝區，確保不讀到殘留的\n
     printf("Press Enter to continue...");
     getchar();// 等待用戶按 Enter
     printf("\033[2J\033[H");// 清除畫面
