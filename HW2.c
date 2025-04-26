@@ -71,7 +71,28 @@ int main(void)
                 clear_screen();
                 continue;//回到主選單
             }
-            
+            else if(ch1=='b' || ch1=='B'){  //使用者輸入b或B
+                while(1){
+                    clear_screen();
+                    printf("輸入一個1~9的正整數：");
+                    scanf("%d",&num);
+                    
+                    if(num<1 || num>9){  //輸入正整數只能在1~9之間
+                        printf("error\n");
+                    }
+                    else{
+                        break;
+                    }
+                }
+                for(o=1;o<=num;o++){  //印出九九乘法表
+                    for(p=1;p<=9;p++){
+                        printf(" %d*%d=%d",o,p,o*p);
+                    }
+                    printf("\n");
+                }
+                clear_screen();
+                continue;//回到主選單
+            }
         }
     }
    
