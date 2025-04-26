@@ -52,11 +52,11 @@ int main(void)
                     printf("請輸入一個'a'~'n'的字元：");
                     scanf("%c",&ch2);
                     clear_buffer();
-                    if(ch2<'a' || ch2>'n'){  //輸入字元只能在a~n之間
-                        printf("error\n");
+                    if(ch2>='a' && ch2<='n'){  //輸入字元只能在a~n之間
+                        break;
                     }
                     else{
-                        break;
+                        printf("error\n");
                     }
                 }
                 for(l=ch2;l>='a';l--){  //印出直角三角形
