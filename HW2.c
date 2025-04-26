@@ -70,7 +70,7 @@ int main(void)
                 }
                 clear_screen();
             }
-            continue;
+            continue;//回到主選單
         }
     }
    
