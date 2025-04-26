@@ -76,7 +76,7 @@ int main(void)
                 while(1){
                     printf("輸入一個1~9的正整數：");
                     scanf("%d",&num);
-                    
+                    clear_buffer();
                     if(num<1 || num>9){  //輸入正整數只能在1~9之間
                         printf("error\n");
                     }
