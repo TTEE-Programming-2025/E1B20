@@ -121,8 +121,9 @@ int main(void)
     return 0;
 }
 void clear_screen(void){
+    clear_buffer();//清除緩衝區，確保不讀到殘留的\n
     printf("Press Enter to continue...");
-        getchar();// 等待用戶按 Enter
+    getchar();// 等待用戶按 Enter
     printf("\033[2J\033[H");// 清除畫面
 }
 void clear_buffer(void){
