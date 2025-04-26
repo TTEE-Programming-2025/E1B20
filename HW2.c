@@ -86,7 +86,7 @@ int main(void)
                 }
                 for(o=1;o<=num;o++){  //印出九九乘法表
                     for(p=1;p<=9;p++){
-                        printf(" %d*%d=%d",o,p,o*p);
+                        printf(" %d*%d=%2d",o,p,o*p);
                     }
                     printf("\n");
                 }
