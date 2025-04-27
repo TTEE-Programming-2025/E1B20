@@ -99,7 +99,7 @@ int main(void)
                     printf("請問是要重新輸入？(y/n)");
                     scanf("%c",&ch3);
                     clear_buffer();
-                    if(ch3!='y' && ch3!='Y' && ch3!='n' && ch3!='Y'){
+                    if(ch3!='y' && ch3!='Y' && ch3!='n' && ch3!='N'){
                         printf("錯誤：只能是n或N或y或Y\n");
                         continue;//輸入字元只能是y或Ｙ或n或N
                     }
