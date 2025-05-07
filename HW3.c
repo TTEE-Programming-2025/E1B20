@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+void clean_screen(void);
+void clean_buffer(void);
 
 int main(void)
 {
@@ -48,14 +50,32 @@ int main(void)
     }
     else
     {
-        printf("             密碼正確\n");
-        printf("               歡迎！！！\n");
+        printf("               密碼正確\n");
+        printf("           ！！！歡迎！！！\n");
     }
-    
-    
+    clean_buffer();
+    clean_screen();
+    printf("*****{Booking System}*****\n");
+    printf("|  a. Available seats    |\n");
+    printf("|  b. Arrange for you    |\n");
+    printf("|  c. Choose by yourself |\n");
+    printf("|  d. Exit               |\n");
+    printf("**************************\n");
     
     
     
     
     return 0;
+}
+
+void clean_screen(void)
+{
+    printf("Press Enter to continue...");
+    getchar();
+    printf("\033[2J\033[H");
+}
+void clean_buffer(void)
+{
+    int c;
+    while((c=getchar())!='\n' && c!=EOF);
 }
