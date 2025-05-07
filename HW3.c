@@ -13,6 +13,7 @@ void clean_buffer(void);
 int main(void)
 {
     int i=0,j=0,k=0,password=0,wrong=0;
+    char option;
     for(i=1;i<=20;i++)
     {
         for(j=1;j<=20-i;j++)
@@ -55,16 +56,43 @@ int main(void)
     }
     clean_buffer();
     clean_screen();
-    printf("*****{Booking System}*****\n");
-    printf("|  a. Available seats    |\n");
-    printf("|  b. Arrange for you    |\n");
-    printf("|  c. Choose by yourself |\n");
-    printf("|  d. Exit               |\n");
-    printf("**************************\n");
-    
-    
-    
-    
+    while(1)
+    {
+        printf("*****{Booking System}*****\n");
+        printf("|  a. Available seats    |\n");
+        printf("|  b. Arrange for you    |\n");
+        printf("|  c. Choose by yourself |\n");
+        printf("|  d. Exit               |\n");
+        printf("**************************\n");
+        printf("請輸入您想要的選項：");
+        option=getchar();
+        clean_buffer();
+        if(option=='d')
+        {
+            clean_screen();
+            while(1)
+            {
+                printf("請問您是否要退出？(y/n)");
+                option=getchar();
+                clean_buffer();
+                if(option=='Y' || option=='y')
+                {
+                    return 0;
+                }
+                else if(option=='N' || option=='n')
+                {
+                    break;
+                }
+                else
+                {
+                    printf("error:請輸入(y/n)\n");
+                    continue;
+                }
+            }
+            clean_screen();
+            continue;
+        }
+    }
     return 0;
 }
 
