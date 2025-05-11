@@ -14,7 +14,7 @@ void clean_buffer(void);
 
 int main(void)
 {
-    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0;
+    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0,seat_num=0;
     char option;
     srand((unsigned int)time(NULL));
     
@@ -70,7 +70,7 @@ int main(void)
             seat[i][j]='-';
         }
     }
-    while(1)
+    while(1)//設定10個佔位
     {
         rand_i=rand()%9;
         rand_j=rand()%9;
@@ -96,7 +96,7 @@ int main(void)
         printf("請輸入您想要的選項：");
         option=getchar();
         clean_buffer();
-        //選項a
+        //第三題
         if(option=='a')
         {
             printf("\\123456789\n");
@@ -112,24 +112,120 @@ int main(void)
             clean_screen();
             continue;
         }
-        //選項b
+        //第四題
         if(option=='b')
         {
-            printf("請問您需要幾個座位");
-            
-            
-            
-            
+            printf("請問您需要幾個座位？(1~4)");
+            scanf("%d",&seat_num);
+            clean_buffer();
+            if(seat_num==1)
+            {
+                rand_i=rand()%9;
+                rand_j=rand()%9;
+                if(seat[rand_i][rand_j]!='*')
+                {
+                    seat[rand_i][rand_j]='@';
+                }
+            }
+            if(seat_num==2)
+            {
+                count=0;
+                rand_i=rand()%9;
+                rand_j=rand()%8;
+                if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*')
+                {
+                    seat[rand_i][rand_j]='@';
+                    seat[rand_i][rand_j+1]='@';
+                }
+            }
+            if(seat_num==3)
+            {
+                rand_i=rand()%9;
+                rand_j=rand()%7;
+                if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i][rand_j+2]!='*')
+                {
+                    seat[rand_i][rand_j]='@';
+                    seat[rand_i][rand_j+1]='@';
+                    seat[rand_i][rand_j+2]='@';
+                }
+            }
+            if(seat_num==4)
+            {
+                if(rand()%2==1)//隨機二選一
+                {
+                    rand_i=rand()%8;
+                    rand_j=rand()%8;
+                    if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i+1][rand_j]!='*' && seat[rand_i+1][rand_j+1]!='*')
+                    {
+                        seat[rand_i][rand_j]='@';
+                        seat[rand_i][rand_j+1]='@';
+                        seat[rand_i+1][rand_j]='@';
+                        seat[rand_i+1][rand_j+1]='@';
+                    }
+                }
+                else
+                {
+                    rand_i=rand()%9;
+                    rand_j=rand()%6;
+                    if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i][rand_j+2]!='*' && seat[rand_i][rand_j+3]!='*')
+                    {
+                        seat[rand_i][rand_j]='@';
+                        seat[rand_i][rand_j+1]='@';
+                        seat[rand_i][rand_j+2]='@';
+                        seat[rand_i][rand_j+3]='@';
+                    }
+                }
+            }
+            for(i=0;i<9;i++)
+            {
+                printf("%d",9-i);
+                for(j=0;j<9;j++)
+                {
+                    printf("%c",seat[i][j]);
+                }
+                printf("\n");
+            }
             printf("您是否滿意此次選位？(y/n)");
             option=getchar();
+            clean_buffer();
             if(option=='n' || option=='N')
             {
+                for(i=0;i<9;i++)
+                {
+                    for(j=0;j<9;j++)
+                    {
+                        if(seat[i][j]=='@')
+                        {
+                            seat[i][j]='-';
+                        }
+                    }
+                }
                 clean_screen();
                 continue;
             }
             if(option=='y' || option=='Y')
             {
-            
+                for(i=0;i<9;i++)
+                {
+                    for(j=0;j<9;j++)
+                    {
+                        if(seat[i][j]=='@')
+                        {
+                            seat[i][j]='*';
+                        }
+                    }
+                }
+                for(i=0;i<9;i++)
+                {
+                    printf("%d",9-i);
+                    for(j=0;j<9;j++)
+                    {
+                        printf("%c",seat[i][j]);
+                    }
+                    printf("\n");
+                }
+                clean_screen();
+                continue;
             }
         }
         //選項d
