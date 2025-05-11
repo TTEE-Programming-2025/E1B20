@@ -7,13 +7,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
 void clean_screen(void);
 void clean_buffer(void);
 
 int main(void)
 {
-    int i=0,j=0,k=0,password=0,wrong=0;
+    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0;
     char option;
+    srand((unsigned int)time(NULL));
+    
+    //第一題
     for(i=1;i<=20;i++)
     {
         for(j=1;j<=20-i;j++)
@@ -56,8 +61,32 @@ int main(void)
     }
     clean_buffer();
     clean_screen();
+    
+    char seat[9][9];
+    for(i=0;i<9;i++)
+    {
+        for(j=0;j<9;j++)
+        {
+            seat[i][j]='-';
+        }
+    }
     while(1)
     {
+        rand_i=rand()%9;
+        rand_j=rand()%9;
+        if(seat[rand_i][rand_j]!='*')
+        {
+            seat[rand_i][rand_j]='*';
+            count++;
+        }
+        if(count==10)
+        {
+            break;
+        }
+    }
+    while(1)
+    {
+        //第二題
         printf("*****{Booking System}*****\n");
         printf("|  a. Available seats    |\n");
         printf("|  b. Arrange for you    |\n");
@@ -67,6 +96,43 @@ int main(void)
         printf("請輸入您想要的選項：");
         option=getchar();
         clean_buffer();
+        //選項a
+        if(option=='a')
+        {
+            printf("\\123456789\n");
+            for(i=0;i<9;i++)
+            {
+                printf("%d",9-i);
+                for(j=0;j<9;j++)
+                {
+                    printf("%c",seat[i][j]);
+                }
+                printf("\n");
+            }
+            clean_screen();
+            continue;
+        }
+        //選項b
+        if(option=='b')
+        {
+            printf("請問您需要幾個座位");
+            
+            
+            
+            
+            printf("您是否滿意此次選位？(y/n)");
+            option=getchar();
+            if(option=='n' || option=='N')
+            {
+                clean_screen();
+                continue;
+            }
+            if(option=='y' || option=='Y')
+            {
+            
+            }
+        }
+        //選項d
         if(option=='d')
         {
             clean_screen();
