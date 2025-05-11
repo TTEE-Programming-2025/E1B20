@@ -14,8 +14,8 @@ void clean_buffer(void);
 
 int main(void)
 {
-    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0,seat_num=0;
-    char option;
+    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0,seat_num=0,seat_i=0,seat_j=0;
+    char option,middle;
     srand((unsigned int)time(NULL));
     
     //第一題
@@ -117,7 +117,6 @@ int main(void)
         {
             printf("請問您需要幾個座位？(1~4)");
             scanf("%d",&seat_num);
-            clean_buffer();
             if(seat_num==1)
             {
                 rand_i=rand()%9;
@@ -129,7 +128,6 @@ int main(void)
             }
             if(seat_num==2)
             {
-                count=0;
                 rand_i=rand()%9;
                 rand_j=rand()%8;
                 if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*')
@@ -185,7 +183,19 @@ int main(void)
                 }
                 printf("\n");
             }
-            printf("您是否滿意此次選位？(y/n)");
+            clean_screen();
+            printf("您是否滿意此次的選位？\n");
+            printf("\\123456789\n");
+            for(i=0;i<9;i++)
+            {
+                printf("%d",9-i);
+                for(j=0;j<9;j++)
+                {
+                    printf("%c",seat[i][j]);
+                }
+                printf("\n");
+            }
+            printf("請回答(y/n):");
             option=getchar();
             clean_buffer();
             if(option=='n' || option=='N')
@@ -215,6 +225,7 @@ int main(void)
                         }
                     }
                 }
+                printf("\\123456789\n");
                 for(i=0;i<9;i++)
                 {
                     printf("%d",9-i);
@@ -228,10 +239,56 @@ int main(void)
                 continue;
             }
         }
-        //選項d
+        //第五題
+        if(option=='c')
+        {
+            while(1)
+            {
+                printf("請依照格式輸入您想坐的座位（如：1-2 為第一列第二行）：");
+                scanf("%d %c %d",&seat_i,&middle,&seat_j);
+                clean_buffer();
+                if(seat[9-seat_i][seat_j-1]=='*')
+                {
+                    printf("error:座位已被選取！\n");
+                    continue;
+                }
+                if(middle!='-')
+                {
+                    printf("error:請輸入正確格式！\n");
+                    continue;
+                }
+                if(seat[9-seat_i][seat_j-1]!='*' && middle=='-')
+                {
+                    break;
+                }
+            }
+            seat[9-seat_i][seat_j-1]='@';
+            printf("\\123456789\n");
+            for(i=0;i<9;i++)
+            {
+                printf("%d",9-i);
+                for(j=0;j<9;j++)
+                {
+                    printf("%c",seat[i][j]);
+                }
+                printf("\n");
+            }
+            for(i=0;i<9;i++)
+            {
+                for(j=0;j<9;j++)
+                {
+                    if(seat[i][j]=='@')
+                    {
+                        seat[i][j]='*';
+                    }
+                }
+            }
+            clean_screen();
+            continue;
+        }
+        //第六題
         if(option=='d')
         {
-            clean_screen();
             while(1)
             {
                 printf("請問您是否要退出？(y/n)");
