@@ -7,18 +7,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-//宣告函式
-void clean_screen(void);
-void clean_buffer(void);
+#include <time.h>               //provide functions and type definitions related to time and date
+//declare function
+void clean_screen(void);        //clean screen
+void clean_buffer(void);        //clean buffer
+void ShowArray(char s[9][9]);   //show array
+void SaveArray(char s[9][9]);   //save array
 
 int main(void)
 {
     int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0,seat_num=0,seat_i=0,seat_j=0,num=0;
     char option,middle;
-    srand((unsigned int)time(NULL));
-    
-    //第一題
+    srand((unsigned int)time(NULL));//set random number seed based on current time
+    //first
     for(i=1;i<=20;i++)
     {
         for(j=1;j<=20-i;j++)
@@ -31,7 +32,6 @@ int main(void)
         }
         printf("\n");
     }
-    
     for(i=1;i<=5;i++)
     {
         printf("           歡迎來到我的程式\n");
@@ -61,8 +61,7 @@ int main(void)
     }
     clean_buffer();
     clean_screen();
-    
-    char seat[9][9];
+    char seat[9][9];//declare two-dimensionl array
     for(i=0;i<9;i++)
     {
         for(j=0;j<9;j++)
@@ -70,7 +69,7 @@ int main(void)
             seat[i][j]='-';
         }
     }
-    while(1)//設定10個佔位
+    while(1)//set 10 seats that have been taken
     {
         rand_i=rand()%9;
         rand_j=rand()%9;
@@ -86,7 +85,8 @@ int main(void)
     }
     while(1)
     {
-        //第二題
+        //second
+        //print menu
         printf("*****{Booking System}*****\n");
         printf("|  a. Available seats    |\n");
         printf("|  b. Arrange for you    |\n");
@@ -96,28 +96,19 @@ int main(void)
         printf("請輸入您想要的選項：");
         option=getchar();
         clean_buffer();
-        //第三題
-        if(option=='a')
+        //question three
+        if(option=='a')//option a
         {
-            printf("\\123456789\n");
-            for(i=0;i<9;i++)
-            {
-                printf("%d",9-i);
-                for(j=0;j<9;j++)
-                {
-                    printf("%c",seat[i][j]);
-                }
-                printf("\n");
-            }
+            ShowArray(seat);
             clean_screen();
             continue;
         }
-        //第四題
-        if(option=='b')
+        //question four
+        if(option=='b')//option b
         {
             printf("請問您需要幾個座位？(1~4)");
             scanf("%d",&seat_num);
-            if(seat_num==1)
+            if(seat_num==1)//one seat
             {
                 rand_i=rand()%9;
                 rand_j=rand()%9;
@@ -126,7 +117,7 @@ int main(void)
                     seat[rand_i][rand_j]='@';
                 }
             }
-            if(seat_num==2)
+            if(seat_num==2)//two seats
             {
                 rand_i=rand()%9;
                 rand_j=rand()%8;
@@ -136,7 +127,7 @@ int main(void)
                     seat[rand_i][rand_j+1]='@';
                 }
             }
-            if(seat_num==3)
+            if(seat_num==3)//three seats
             {
                 rand_i=rand()%9;
                 rand_j=rand()%7;
@@ -147,9 +138,9 @@ int main(void)
                     seat[rand_i][rand_j+2]='@';
                 }
             }
-            if(seat_num==4)
+            if(seat_num==4)//four seats
             {
-                if(rand()%2==1)//隨機二選一
+                if(rand()%2==1)//random choice
                 {
                     rand_i=rand()%8;
                     rand_j=rand()%8;
@@ -174,27 +165,9 @@ int main(void)
                     }
                 }
             }
-            for(i=0;i<9;i++)
-            {
-                printf("%d",9-i);
-                for(j=0;j<9;j++)
-                {
-                    printf("%c",seat[i][j]);
-                }
-                printf("\n");
-            }
             clean_screen();
             printf("您是否滿意此次的選位？\n");
-            printf("\\123456789\n");
-            for(i=0;i<9;i++)
-            {
-                printf("%d",9-i);
-                for(j=0;j<9;j++)
-                {
-                    printf("%c",seat[i][j]);
-                }
-                printf("\n");
-            }
+            ShowArray(seat);//show array
             printf("請回答(y/n):");
             option=getchar();
             clean_buffer();
@@ -210,37 +183,16 @@ int main(void)
                         }
                     }
                 }
-                clean_screen();
-                continue;
             }
             if(option=='y' || option=='Y')
             {
-                for(i=0;i<9;i++)
-                {
-                    for(j=0;j<9;j++)
-                    {
-                        if(seat[i][j]=='@')
-                        {
-                            seat[i][j]='*';
-                        }
-                    }
-                }
-                printf("\\123456789\n");
-                for(i=0;i<9;i++)
-                {
-                    printf("%d",9-i);
-                    for(j=0;j<9;j++)
-                    {
-                        printf("%c",seat[i][j]);
-                    }
-                    printf("\n");
-                }
-                clean_screen();
-                continue;
+                SaveArray(seat);//save array
             }
+            clean_screen();
+            continue;
         }
-        //第五題
-        if(option=='c')
+        //question five
+        if(option=='c')//option c
         {
             printf("請輸入您想要的座位數量(0~71)：");
             scanf("%d",&num);
@@ -269,31 +221,13 @@ int main(void)
                 }
                 seat[9-seat_i][seat_j-1]='@';
             }
-            printf("\\123456789\n");
-            for(i=0;i<9;i++)
-            {
-                printf("%d",9-i);
-                for(j=0;j<9;j++)
-                {
-                    printf("%c",seat[i][j]);
-                }
-                printf("\n");
-            }
-            for(i=0;i<9;i++)
-            {
-                for(j=0;j<9;j++)
-                {
-                    if(seat[i][j]=='@')
-                    {
-                        seat[i][j]='*';
-                    }
-                }
-            }
+            ShowArray(seat);//show array
+            SaveArray(seat);//save array
             clean_screen();
             continue;
         }
-        //第六題
-        if(option=='d')
+        //question six
+        if(option=='d')//option d
         {
             while(1)
             {
@@ -331,4 +265,32 @@ void clean_buffer(void)
 {
     int c;
     while((c=getchar())!='\n' && c!=EOF);
+}
+void ShowArray(char s[9][9])
+{
+    int i=0,j=0;
+    printf("\\123456789\n");
+    for(i=0;i<9;i++)
+    {
+        printf("%d",9-i);
+        for(j=0;j<9;j++)
+        {
+            printf("%c",s[i][j]);
+        }
+        printf("\n");
+    }
+}
+void SaveArray(char s[9][9])
+{
+    int i=0,j=0;
+    for(i=0;i<9;i++)
+    {
+        for(j=0;j<9;j++)
+        {
+            if(s[i][j]=='@')
+            {
+                s[i][j]='*';
+            }
+        }
+    }
 }
