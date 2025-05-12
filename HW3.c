@@ -110,58 +110,78 @@ int main(void)
             scanf("%d",&seat_num);
             if(seat_num==1)//one seat
             {
-                rand_i=rand()%9;
-                rand_j=rand()%9;
-                if(seat[rand_i][rand_j]!='*')
+                while(1)//keep finding the correct seats
                 {
-                    seat[rand_i][rand_j]='@';
+                    rand_i=rand()%9;
+                    rand_j=rand()%9;
+                    if(seat[rand_i][rand_j]!='*')
+                    {
+                        seat[rand_i][rand_j]='@';
+                        break;
+                    }
                 }
             }
-            if(seat_num==2)//two seats
+            if(seat_num==2)//two continuous seats
             {
-                rand_i=rand()%9;
-                rand_j=rand()%8;
-                if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*')
+                while(1)//keep finding the correct seats
                 {
-                    seat[rand_i][rand_j]='@';
-                    seat[rand_i][rand_j+1]='@';
-                }
-            }
-            if(seat_num==3)//three seats
-            {
-                rand_i=rand()%9;
-                rand_j=rand()%7;
-                if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i][rand_j+2]!='*')
-                {
-                    seat[rand_i][rand_j]='@';
-                    seat[rand_i][rand_j+1]='@';
-                    seat[rand_i][rand_j+2]='@';
-                }
-            }
-            if(seat_num==4)//four seats
-            {
-                if(rand()%2==1)//random choice
-                {
-                    rand_i=rand()%8;
-                    rand_j=rand()%8;
-                    if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i+1][rand_j]!='*' && seat[rand_i+1][rand_j+1]!='*')
+                    rand_i=rand()%9;
+                    rand_j=rand()%8;//prevent from overflowing
+                    if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*')
                     {
                         seat[rand_i][rand_j]='@';
                         seat[rand_i][rand_j+1]='@';
-                        seat[rand_i+1][rand_j]='@';
-                        seat[rand_i+1][rand_j+1]='@';
+                        break;
                     }
                 }
-                else
+               
+            }
+            if(seat_num==3)//three continuous seats
+            {
+                while(1)//keep finding the correct seats
                 {
                     rand_i=rand()%9;
-                    rand_j=rand()%6;
-                    if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i][rand_j+2]!='*' && seat[rand_i][rand_j+3]!='*')
+                    rand_j=rand()%7;//prevent from overflowing
+                    if(seat[rand_i][rand_j]=='-' && seat[rand_i][rand_j+1]=='-' && seat[rand_i][rand_j+2]=='-')
                     {
                         seat[rand_i][rand_j]='@';
                         seat[rand_i][rand_j+1]='@';
                         seat[rand_i][rand_j+2]='@';
-                        seat[rand_i][rand_j+3]='@';
+                        break;
+                    }
+                }
+            }
+            if(seat_num==4)//four continuous seats
+            {
+                
+                while(1)//keep finding the correct seats
+                {
+                    //random choice
+                    if(rand()%2==1)//first choice
+                    {
+                        rand_i=rand()%8;//prevent from overflowing
+                        rand_j=rand()%8;//prevent from overflowing
+                        if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i+1][rand_j]!='*' && seat[rand_i+1][rand_j+1]!='*')
+                        {
+                            seat[rand_i][rand_j]='@';
+                            seat[rand_i][rand_j+1]='@';
+                            seat[rand_i+1][rand_j]='@';
+                            seat[rand_i+1][rand_j+1]='@';
+                            break;
+                        }
+                    }
+                    else//second choice
+                    {
+                        rand_i=rand()%9;
+                        rand_j=rand()%6;//prevent from overflowing
+                        if(seat[rand_i][rand_j]!='*' && seat[rand_i][rand_j+1]!='*' && seat[rand_i][rand_j+2]!='*' && seat[rand_i][rand_j+3]!='*')
+                        {
+                            seat[rand_i][rand_j]='@';
+                            seat[rand_i][rand_j+1]='@';
+                            seat[rand_i][rand_j+2]='@';
+                            seat[rand_i][rand_j+3]='@';
+                            break;
+                        }
                     }
                 }
             }
@@ -171,7 +191,7 @@ int main(void)
             printf("請回答(y/n):");
             option=getchar();
             clean_buffer();
-            if(option=='n' || option=='N')
+            if(option=='n' || option=='N')//not satisfy the seats
             {
                 for(i=0;i<9;i++)
                 {
@@ -184,7 +204,7 @@ int main(void)
                     }
                 }
             }
-            if(option=='y' || option=='Y')
+            if(option=='y' || option=='Y')//satisfy the seats
             {
                 SaveArray(seat);//save array
             }
@@ -194,22 +214,23 @@ int main(void)
         //question five
         if(option=='c')//option c
         {
-            printf("請輸入您想要的座位數量(0~71)：");
+            printf("請輸入您想要的座位數量(0~71)：");//choose the number of seats
             scanf("%d",&num);
             clean_buffer();
             for(i=1;i<=num;i++)
             {
                 while(1)
                 {
+                    printf("第%d個座位\n",i);
                     printf("請依照格式輸入您想坐的座位（如：1-2 為第一列第二行）");
                     scanf("%d %c %d",&seat_i,&middle,&seat_j);
                     clean_buffer();
-                    if(middle!='-')
+                    if(middle!='-')//character must be '-'
                     {
                         printf("error:請輸入正確格式！\n");
                         continue;
                     }
-                    if(seat[9-seat_i][seat_j-1]=='*')
+                    if(seat[9-seat_i][seat_j-1]=='*')//
                     {
                         printf("error:座位已被選取！\n");
                         continue;
@@ -234,11 +255,11 @@ int main(void)
                 printf("請問您是否要退出？(y/n)");
                 option=getchar();
                 clean_buffer();
-                if(option=='Y' || option=='y')
+                if(option=='Y' || option=='y')//exit
                 {
                     return 0;
                 }
-                else if(option=='N' || option=='n')
+                else if(option=='N' || option=='n')//continue
                 {
                     break;
                 }
@@ -254,7 +275,7 @@ int main(void)
     }
     return 0;
 }
-//定義函式
+//define function
 void clean_screen(void)
 {
     printf("Press Enter to continue...");
@@ -294,3 +315,12 @@ void SaveArray(char s[9][9])
         }
     }
 }
+//此程式須在終端機上編譯
+/*
+ 心得：
+ 我覺得本次的程式作業，相比前兩次，變得相當有挑戰性。這次的作業不僅展示了迴圈與陣列之間的緊密關係，
+ 又展示了在處理陣列時是否有溢位的重要性。在寫這次作業時，我深刻感受到程式與日常生活是息息相關的，
+ 例如：本次作業中的選位系統，就跟我們日常生活中的電影院、歌劇院、演唱會是有高度關聯的。
+ 我認為藉由這次的學習經驗，我學習到程式不單單只是課本中的例題或考試題目，程式更是我們日常生活中
+ 不可或缺的一部分，不僅可以使我們生活更加便利，同時也使我們能更有效率地工作、全球連繫，並即時獲取大量資訊。
+ */
