@@ -8,13 +8,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+//宣告函式
 void clean_screen(void);
 void clean_buffer(void);
 
 int main(void)
 {
-    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0,seat_num=0,seat_i=0,seat_j=0;
+    int i=0,j=0,k=0,password=0,wrong=0,count=0,rand_i=0,rand_j=0,seat_num=0,seat_i=0,seat_j=0,num=0;
     char option,middle;
     srand((unsigned int)time(NULL));
     
@@ -242,27 +242,33 @@ int main(void)
         //第五題
         if(option=='c')
         {
-            while(1)
+            printf("請輸入您想要的座位數量(0~71)：");
+            scanf("%d",&num);
+            clean_buffer();
+            for(i=1;i<=num;i++)
             {
-                printf("請依照格式輸入您想坐的座位（如：1-2 為第一列第二行）：");
-                scanf("%d %c %d",&seat_i,&middle,&seat_j);
-                clean_buffer();
-                if(seat[9-seat_i][seat_j-1]=='*')
+                while(1)
                 {
-                    printf("error:座位已被選取！\n");
-                    continue;
+                    printf("請依照格式輸入您想坐的座位（如：1-2 為第一列第二行）");
+                    scanf("%d %c %d",&seat_i,&middle,&seat_j);
+                    clean_buffer();
+                    if(middle!='-')
+                    {
+                        printf("error:請輸入正確格式！\n");
+                        continue;
+                    }
+                    if(seat[9-seat_i][seat_j-1]=='*')
+                    {
+                        printf("error:座位已被選取！\n");
+                        continue;
+                    }
+                    if(seat[9-seat_i][seat_j-1]!='*' && middle=='-' )
+                    {
+                        break;
+                    }
                 }
-                if(middle!='-')
-                {
-                    printf("error:請輸入正確格式！\n");
-                    continue;
-                }
-                if(seat[9-seat_i][seat_j-1]!='*' && middle=='-')
-                {
-                    break;
-                }
+                seat[9-seat_i][seat_j-1]='@';
             }
-            seat[9-seat_i][seat_j-1]='@';
             printf("\\123456789\n");
             for(i=0;i<9;i++)
             {
@@ -314,7 +320,7 @@ int main(void)
     }
     return 0;
 }
-
+//定義函式
 void clean_screen(void)
 {
     printf("Press Enter to continue...");
