@@ -53,7 +53,17 @@ int main(void)
     }
     clean_screen();
     clean_buffer();
-   
+    printf("**********{Grade System}**********\n");
+    printf("|  a. Enter student grades       |\n");
+    printf("|  b. Display student grades     |\n");
+    printf("|  c. Search for student grades  |\n");
+    printf("|  d. Grade ranking              |\n");
+    printf("|  e. Exit system                |\n");
+    printf("**********************************\n");
+    
+    
+    
+    
     return 0;
 }
 
