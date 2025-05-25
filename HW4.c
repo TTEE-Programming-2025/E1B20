@@ -6,6 +6,8 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 10
+
 struct data             //宣告結構
 {
     char name[15];
@@ -14,7 +16,8 @@ struct data             //宣告結構
     int physic;
     int English;
 };
-struct data student[10];//宣告結構變數
+struct data student[MAX];//宣告結構變數
+
 void clean_buffer(void);
 void clean_screen(void);
 void option_a(void);
@@ -82,8 +85,7 @@ int main(void)
         clean_buffer();
         if(option=='a' || option=='A')
         {
-           
-            
+            option_a();
         }
         if(option=='b' || option=='B')
         {
@@ -106,8 +108,6 @@ int main(void)
         }
     }
    
-    
-    
     return 0;
 }
 
@@ -124,10 +124,34 @@ void clean_screen(void)
 }
 void option_a(void)
 {
-    
-    
-    
+    int num=0,i=0;
+    clean_screen();
+    do{
+        printf("請輸入5~10的任一個整數：");
+        scanf("%d",&num);
+        clean_buffer();
+    }while(num>10 || num<5);
+    for(i=0;i<num;i++)
+    {
+        printf("請輸入第%d位學生姓名：",i+1);
+        scanf("%s",student[i].name);
+        clean_buffer();
+        printf("請輸入學生學號：");
+        scanf("%s",student[i].code);
+        clean_buffer();
+        printf("請輸入數學成績：");
+        scanf("%d",&student[i].math);
+        clean_buffer();
+        printf("請輸入物理成績：");
+        scanf("%d",&student[i].physic);
+        clean_buffer();
+        printf("請輸入英文成績：");
+        scanf("%d",&student[i].English);
+        clean_buffer();
+    }
+    return;
 }
+
 void option_e(void)
 {
     char option;
