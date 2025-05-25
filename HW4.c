@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 10
+int num=0;
 
 struct data             //宣告結構
 {
@@ -89,8 +90,7 @@ int main(void)
         }
         if(option=='b' || option=='B')
         {
-           
-            
+            option_b();
         }
         if(option=='c' || option=='C')
         {
@@ -124,7 +124,7 @@ void clean_screen(void)
 }
 void option_a(void)
 {
-    int num=0,i=0;
+    int i=0;
     clean_screen();
     do{
         printf("請輸入5~10的任一個整數：");
@@ -151,7 +151,22 @@ void option_a(void)
     }
     return;
 }
-
+void option_b(void)
+{
+    int i=0;
+    clean_screen();
+    for(i=0;i<num;i++)
+    {
+        printf("第%d位學生姓名：%s\n",i+1,student[i].name);
+        printf("學生學號：%s\n",student[i].code);
+        printf("數學成績：%d\n",student[i].math);
+        printf("物理成績：%d\n",student[i].physic);
+        printf("英文成績：%d\n",student[i].English);
+        printf("平均成績：%.1f\n",(float)(student[i].math+student[i].physic+student[i].English)/3);
+    }
+    clean_screen();
+    return;
+}
 void option_e(void)
 {
     char option;
