@@ -6,6 +6,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAX 10
 int num=0;
 
@@ -16,6 +17,7 @@ struct data             //宣告結構
     int math;
     int physic;
     int English;
+    float avg;
 };
 struct data student[MAX];//宣告結構變數
 
@@ -26,6 +28,11 @@ void option_b(void);
 void option_c(void);
 void option_d(void);
 void option_e(void);
+void swap(struct data *a, struct data *b) {
+    struct data temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 int main(void)
 {
@@ -94,13 +101,11 @@ int main(void)
         }
         if(option=='c' || option=='C')
         {
-           
-            
+            option_c();
         }
         if(option=='d' || option=='D')
         {
-           
-            
+            option_d();
         }
         if(option=='e' || option=='E')
         {
@@ -148,7 +153,9 @@ void option_a(void)
         printf("請輸入英文成績：");
         scanf("%d",&student[i].English);
         clean_buffer();
+        student[i].avg=(float)(student[i].math+student[i].physic+student[i].English)/3;
     }
+    clean_screen();
     return;
 }
 void option_b(void)
@@ -162,8 +169,52 @@ void option_b(void)
         printf("數學成績：%d\n",student[i].math);
         printf("物理成績：%d\n",student[i].physic);
         printf("英文成績：%d\n",student[i].English);
-        printf("平均成績：%.1f\n",(float)(student[i].math+student[i].physic+student[i].English)/3);
+        printf("平均成績：%.1f\n",student[i].avg);
     }
+    clean_screen();
+    return;
+}
+void option_c(void)
+{
+    int i=0;
+    char name[20];
+    clean_screen();
+    printf("請輸入您要搜尋的姓名");
+    scanf("%s",name);
+    for(i=0;i<num;i++)
+    {
+        if(strcmp(name,student[i].name)==0)
+        {
+            printf("第%d位學生姓名：%s\n",i+1,student[i].name);
+            printf("學生學號：%s\n",student[i].code);
+            printf("數學成績：%d\n",student[i].math);
+            printf("物理成績：%d\n",student[i].physic);
+            printf("英文成績：%d\n",student[i].English);
+            printf("平均成績：%.1f\n",student[i].avg);
+        }
+    }
+    clean_buffer();
+    clean_screen();
+    return;
+}
+void option_d(void)
+{
+    clean_screen();
+    int i,j;
+        printf("大到小:\n");
+        for (i = 0; i < num - 1; i++) {
+            for (j = 0; j < num - i - 1; j++) {
+                if (student[j].avg < student[j + 1].avg) {
+                    swap(&student[j], &student[j + 1]);
+                }
+            }
+        }
+
+        printf("%-8s %-10s %-6s\n", "姓名", "學號", "平均");
+        for (i = 0; i < num; i++) {
+            printf("%-8s %-10s %-6.1f\n", student[i].name, student[i].code, student[i].avg);
+        }
+    clean_buffer();
     clean_screen();
     return;
 }
