@@ -6,12 +6,27 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+struct data             //宣告結構
+{
+    char name[15];
+    char code[15];
+    int math;
+    int physic;
+    int English;
+};
+struct data student[10];//宣告結構變數
 void clean_buffer(void);
 void clean_screen(void);
+void option_a(void);
+void option_b(void);
+void option_c(void);
+void option_d(void);
+void option_e(void);
 
 int main(void)
 {
     int i=0,j=0,k=0,password=0,wrong=0;
+    char option;
     for(i=1;i<=20;i++)
     {
         for(j=1;j<=20-i;j++)
@@ -51,17 +66,46 @@ int main(void)
         printf("               密碼正確\n");
         printf("           ！！！歡迎！！！\n");
     }
-    clean_screen();
     clean_buffer();
-    printf("**********{Grade System}**********\n");
-    printf("|  a. Enter student grades       |\n");
-    printf("|  b. Display student grades     |\n");
-    printf("|  c. Search for student grades  |\n");
-    printf("|  d. Grade ranking              |\n");
-    printf("|  e. Exit system                |\n");
-    printf("**********************************\n");
-    
-    
+    clean_screen();
+    while(1)
+    {
+        printf("**********{Grade System}**********\n");
+        printf("|  a. Enter student grades       |\n");
+        printf("|  b. Display student grades     |\n");
+        printf("|  c. Search for student grades  |\n");
+        printf("|  d. Grade ranking              |\n");
+        printf("|  e. Exit system                |\n");
+        printf("**********************************\n");
+        printf("請輸入您想要的選項：");
+        scanf("%c",&option);
+        clean_buffer();
+        if(option=='a' || option=='A')
+        {
+           
+            
+        }
+        if(option=='b' || option=='B')
+        {
+           
+            
+        }
+        if(option=='c' || option=='C')
+        {
+           
+            
+        }
+        if(option=='d' || option=='D')
+        {
+           
+            
+        }
+        if(option=='e' || option=='E')
+        {
+            option_e();
+        }
+    }
+   
     
     
     return 0;
@@ -69,13 +113,41 @@ int main(void)
 
 void clean_buffer(void)
 {
+    int c;
+    while((c=getchar())!='\n' && c!=EOF);
+}
+void clean_screen(void)
+{
     printf("Press Enter to continue...");
     getchar();
     printf("\033[2J\033[H");
 }
-void clean_screen(void)
+void option_a(void)
 {
-    int c;
-    while((c=getchar())!='\n' && c!=EOF);
+    
+    
+    
 }
-
+void option_e(void)
+{
+    char option;
+    do{
+        printf("您確定要離開？(y/n)");
+        scanf("%c",&option);
+        clean_buffer();
+        if(option=='n' || option=='N')
+        {
+            return;
+        }
+        else if(option=='y' || option=='Y')
+        {
+            printf("感謝使用，系統退出！\n");
+            exit(0);
+        }
+        else
+        {
+            printf("無效輸入，請輸入y或n！\n");
+        }
+    }while(1);
+    
+}
