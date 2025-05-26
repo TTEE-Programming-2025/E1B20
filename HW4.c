@@ -8,8 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX 10
-int num=0;
-
+int num=0;              //宣告全域變數
 struct data             //宣告結構
 {
     char name[15];
@@ -19,16 +18,17 @@ struct data             //宣告結構
     int English;
     float avg;
 };
-struct data student[MAX];//宣告結構變數
+struct data student[MAX];   //宣告結構變數
 
-void clean_buffer(void);
-void clean_screen(void);
-void option_a(void);
-void option_b(void);
-void option_c(void);
-void option_d(void);
-void option_e(void);
-void swap(struct data *a, struct data *b) {
+void clean_buffer(void);    //宣告清除緩衝區函式
+void clean_screen(void);    //宣告清除螢幕函式
+void option_a(void);        //宣告a選項函式
+void option_b(void);        //宣告b選項函式
+void option_c(void);        //宣告c選項函式
+void option_d(void);        //宣告d選項函式
+void option_e(void);        //宣告e選項函式
+void swap(struct data *a, struct data *b)//宣告交換函式
+{
     struct data temp = *a;
     *a = *b;
     *b = temp;
@@ -115,7 +115,7 @@ int main(void)
    
     return 0;
 }
-
+                /*定義函式*/
 void clean_buffer(void)
 {
     int c;
@@ -127,37 +127,99 @@ void clean_screen(void)
     getchar();
     printf("\033[2J\033[H");
 }
+                /*選項a*/
 void option_a(void)
 {
-    int i=0;
+    int i=0,j=0,flag=0;
     clean_screen();
     do{
         printf("請輸入5~10的任一個整數：");
         scanf("%d",&num);
         clean_buffer();
-    }while(num>10 || num<5);
+    }while(num>10 || num<5);    //限定只能是5~10的整數
     for(i=0;i<num;i++)
     {
         printf("請輸入第%d位學生姓名：",i+1);
         scanf("%s",student[i].name);
         clean_buffer();
-        printf("請輸入學生學號：");
-        scanf("%s",student[i].code);
-        clean_buffer();
-        printf("請輸入數學成績：");
-        scanf("%d",&student[i].math);
-        clean_buffer();
-        printf("請輸入物理成績：");
-        scanf("%d",&student[i].physic);
-        clean_buffer();
-        printf("請輸入英文成績：");
-        scanf("%d",&student[i].English);
-        clean_buffer();
+        while(1)
+        {
+            printf("請輸入學生學號：");
+            scanf("%s",student[i].code);
+            clean_buffer();
+            if(strlen(student[i].code)!=6)  //限定只能是6位數
+            {
+                printf("無效輸入，請輸入6位數字學號！\n");
+                continue;
+            }
+            else
+            {
+                for (j=0; j<6;j++)
+                {
+                    if (student[i].code[j]<'0' || student[i].code[j]>'9')   //限定只能是數字
+                    {
+                        printf("無效輸入，請輸入6位數字學號！\n");
+                        flag++;
+                    }
+                }
+            if(flag==0)
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+            }
+        }
+        do
+        {
+            printf("請輸入數學成績：");
+            scanf("%d",&student[i].math);
+            clean_buffer();
+            if(student[i].math<=100 && student[i].math>=0)  //限定只能是0~100的整數
+            {
+                break;
+            }
+            else
+            {
+                printf("無效輸入，請輸入1~100的整數！\n");
+            }
+        }while(1);
+        do
+        {
+            printf("請輸入物理成績：");
+            scanf("%d",&student[i].physic);
+            clean_buffer();
+            if(student[i].physic<=100 && student[i].physic>=0)  //限定只能是0~100的整數
+            {
+                break;
+            }
+            else
+            {
+                printf("無效輸入，請輸入1~100的整數！\n");
+            }
+        }while(1);
+        do
+        {
+            printf("請輸入英文成績：");
+            scanf("%d",&student[i].English);
+            clean_buffer();
+            if(student[i].English<=100 && student[i].English>=0)    //限定只能是0~100的整數
+            {
+                break;
+            }
+            else
+            {
+                printf("無效輸入，請輸入1~100的整數！\n");
+            }
+        }while(1);
         student[i].avg=(float)(student[i].math+student[i].physic+student[i].English)/3;
     }
     clean_screen();
     return;
 }
+                /*選項b*/
 void option_b(void)
 {
     int i=0;
@@ -174,12 +236,13 @@ void option_b(void)
     clean_screen();
     return;
 }
+                /*選項c*/
 void option_c(void)
 {
-    int i=0;
+    int i=0,flag=0;
     char name[20];
     clean_screen();
-    printf("請輸入您要搜尋的姓名");
+    printf("請輸入您要搜尋的姓名：");
     scanf("%s",name);
     for(i=0;i<num;i++)
     {
@@ -192,11 +255,20 @@ void option_c(void)
             printf("英文成績：%d\n",student[i].English);
             printf("平均成績：%.1f\n",student[i].avg);
         }
+        else
+        {
+            flag++;
+        }
+    }
+    if(flag==num)
+    {
+        printf("查無此人！\n");
     }
     clean_buffer();
     clean_screen();
     return;
 }
+                /*選項d*/
 void option_d(void)
 {
     clean_screen();
@@ -218,6 +290,7 @@ void option_d(void)
     clean_screen();
     return;
 }
+                /*選項e*/
 void option_e(void)
 {
     char option;
@@ -239,5 +312,12 @@ void option_e(void)
             printf("無效輸入，請輸入y或n！\n");
         }
     }while(1);
-    
 }
+/*
+ 撰寫這個學生成績管理系統讓我感受到程式設計的樂趣！
+ 從輸入成績到排序顯示，每個功能都像在打造一個小世界。
+ 因為這次的選單介面是利用函式完成的，所以程式中很常需
+ 要在主程式與函式間來回穿梭，因此我頻繁地在主程式與函式間來回穿梭，
+ 深刻體會到全域變數的便捷，讓資料管理更流暢。
+ 這種模組化的設計不僅讓程式碼更清晰，也讓我感受到結構化程式設計的魅力。
+ */
